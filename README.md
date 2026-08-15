@@ -11,8 +11,10 @@ claude plugin marketplace add a7512cs/thinking-operators
 claude plugin install thinking-operators@thinking-operators
 ```
 
-不用預先建立任何資料夾。（開發者想改程式碼再裝：clone 後
-`claude plugin marketplace add <clone 路徑>`，改完跑 `claude plugin marketplace update thinking-operators` 並重裝。）
+不用預先建立任何資料夾。
+
+開發者改完程式碼要讓已安裝的 plugin 更新：marketplace 快照是從 GitHub 拉的，
+所以流程是 **commit → push →** `claude plugin marketplace update thinking-operators` **→ uninstall/install 重裝**。
 
 ## 用法
 
