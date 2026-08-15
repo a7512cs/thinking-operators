@@ -2,7 +2,7 @@
 
 問答式解題引擎（Claude Code plugin）。55 個「思考運算子」（12 家族：加減乘除反代變時問資散驗），
 用分診 → 選家族 → 每回合兩招生候選 → 收斂的流程解一個卡住的問題。
-tracker 腳本記錄每招的使用狀態，hook 每輪自動回報一行 🧮 狀態——人和 AI 都不會亂。
+tracker 腳本記錄每招的使用狀態，hook 每輪自動回報一行 🧩 狀態——人和 AI 都不會亂。
 
 ## 安裝
 
@@ -26,7 +26,6 @@ claude plugin install thinking-operators@thinking-operators
 ```
 
 - 只能手動觸發（`disable-model-invocation: true`），不會在平常工作時自己跳出來。
-- 對話中說「陪練」可切換成只出問句、不給候選。
 
 ## 解題單存在哪？
 

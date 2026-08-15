@@ -193,7 +193,7 @@ def status_line(slug, state, catalog):
             frags.append(f"{fam['zh']}{touched}/{len(ids)}")
     fam_part = " ".join(frags) if frags else "尚未動用任何運算子"
     return (
-        f"🧮 {slug}｜已用{counts['used']} 詢問中{counts['asking']} "
+        f"🧩 {slug}｜已用{counts['used']} 詢問中{counts['asking']} "
         f"跳過{counts['skipped']} 剩{counts['unused']}/{total}｜{fam_part}"
     )
 

@@ -12,7 +12,7 @@ solve 流程橫跨多輪問答，需要「哪些運算子已用／詢問中／�
 
 plugin 自帶 `hooks/hooks.json`（UserPromptSubmit hook）。使用者每送出一句話，
 `statusline.sh` 從 cwd 往上找 `solve-sessions/.active`（跟 git 找 `.git` 同一邏輯）：
-找到就跑 `tracker.py status` 把一行 🧮 狀態注入 context；找不到就靜默 exit 0。
+找到就跑 `tracker.py status` 把一行 🧩 狀態注入 context；找不到就靜默 exit 0。
 狀態的唯一事實來源是 `state.json`（腳本寫入），AI 只是搬運工。
 
 ## 替代方案
