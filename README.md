@@ -1,60 +1,69 @@
 # thinking-operators
 
-問答式解題引擎（Claude Code plugin）。55 個「思考運算子」（12 家族：加減乘除反代變時問資散驗），
-用分診 → 選家族 → 每回合兩招生候選 → 收斂的流程解一個卡住的問題。
-tracker 腳本記錄每招的使用狀態，你每次送出訊息時 hook 自動回報一行 🧩 狀態——人和 AI 都不會亂。
+> 繁體中文說明：[README.zh-TW.md](./README.zh-TW.md)
 
-## 安裝
+A question-and-answer problem-solving engine for Claude Code.
+It packs 55 "thinking operators" in 12 families (add, subtract, multiply, divide,
+reverse, substitute, morph, time, reframe, resources, diverge, verify).
+The flow: clarify the problem → triage → pick families → 2 operators per round,
+4 candidates each → converge. A tracker script records the state of every operator.
+Each time you send a message, a hook prints one 🧩 status line — you and the AI never lose track.
+
+## Install
 
 ```bash
 claude plugin marketplace add a7512cs/thinking-operators
 claude plugin install thinking-operators@thinking-operators
 ```
 
-不用預先建立任何資料夾。
+No folder setup needed.
 
-開發者改完程式碼要讓已安裝的 plugin 更新：marketplace 快照是從 GitHub 拉的，
-所以流程是 **commit → push →** `claude plugin marketplace update thinking-operators` **→ uninstall/install 重裝**。
+To ship an update as a developer: commit → push →
+`claude plugin marketplace update thinking-operators` → uninstall/install.
 
-## 用法
+## Usage
 
-在你想解題的資料夾開一個 Claude Code session，輸入：
-
-```
-/thinking-operators:solve            # 打 /solve 會模糊比對到
-/thinking-operators:solve --resume   # 繼續這個資料夾上次未結束的 session
-```
-
-- 只能手動觸發（`disable-model-invocation: true`），不會在平常工作時自己跳出來。
-
-## 解題單存在哪？
-
-**在你跑指令的資料夾**：第一場 session 會建立 `./solve-sessions/`，
-之後每場一個子資料夾（`worksheet.md` ＋ `state.json`）。
-腳本會從當下目錄往上找 `solve-sessions/`（跟 git 找 `.git` 同一邏輯），
-所以在專案的子目錄裡也能接上同一場 session。每個資料夾同一時間只有一場 active。
-
-要不要把 `solve-sessions/` commit 進你的 git 由你決定（`.active` 暫存檔已自動 gitignore）。
-**注意：worksheet 含你的問題原文，公開 repo 請自行留意。**
-
-## 結構
+Open Claude Code in the folder where you want to solve a problem:
 
 ```
-.claude-plugin/marketplace.json      marketplace 定義
+/thinking-operators:solve            # typing /solve fuzzy-matches it
+/thinking-operators:solve --resume   # continue the unfinished session in this folder
+```
+
+Manual trigger only (`disable-model-invocation: true`) — it never fires on its own.
+
+## Where your data goes
+
+The first session creates `./solve-sessions/` in your current folder.
+Each session gets a sub-folder with `worksheet.md` and `state.json`.
+Scripts search upward from the current directory for `solve-sessions/`
+(like git finds `.git`), so sub-directories work too.
+One active session per folder.
+
+Committing `solve-sessions/` to git is your choice (`.active` is auto-gitignored).
+Note: worksheets contain your problem text — be careful in public repos.
+
+## Layout
+
+```
+.claude-plugin/marketplace.json      marketplace definition
 plugins/thinking-operators/
 ├── .claude-plugin/plugin.json
-├── skills/solve/SKILL.md            問答流程
-├── references/operators.json        55 招機讀版（tracker 與 SKILL 的單一事實來源）
-├── references/operators.md          55 招人讀版
-├── references/sources.md            185 條原始清單全文（延伸閱讀）
-├── scripts/tracker.py               session 狀態追蹤（start/triage/ask/used/skip/status/unused/end/resume/list）
-├── scripts/statusline.sh            UserPromptSubmit hook：有 active session 才吐狀態行
+├── skills/solve/SKILL.md            the Q&A flow
+├── references/operators.json        55 operators, machine-readable (single source of truth)
+├── references/operators.md          55 operators, human-readable
+├── references/sources.md            all 185 original items from 8 classic checklists
+├── scripts/tracker.py               session state tracking
+├── scripts/statusline.sh            UserPromptSubmit hook: prints status only when a session is active
 └── hooks/hooks.json
-CONTEXT.md                           詞彙表
-docs/adr/                            決策紀錄
+CONTEXT.md                           glossary
+docs/adr/                            decision records
 ```
 
-## 限制
+## Limits
 
-- macOS / Linux（hook 是 bash script）；Windows 未測試。
-- 解題單的「結果回填」欄請事後補：累積「哪招真的救過我」的資料。
+- The skill content (operators, prompts, status line) is written in Traditional Chinese.
+  The conversation itself follows your language.
+- macOS / Linux (the hook is a bash script). Windows untested.
+- Fill in the worksheet's "result" section afterwards — it builds your own record of
+  which operators actually helped.
