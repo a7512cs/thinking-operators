@@ -1,6 +1,6 @@
 {
   "name": "thinking-operators",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "問答式解題引擎：55 個思考運算子（12 家族），分診 → 選家族 → 代打生候選 → 收斂；tracker 腳本追蹤已用/未用，hook 每輪自動回報狀態。僅手動觸發。",
   "author": {
     "name": "a7512cs"

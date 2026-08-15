@@ -29,11 +29,16 @@ disable-model-invocation: true
 - 讀 operators.md 進 context。
 - 完成準則：🧮 狀態行已出現在對話裡（resume 時）。
 
-### 1. 問題一句話
+### 1. 問題釐清（拷問式）
 
-- 引導使用者把問題說成「**目標 − 現狀**」的一句話；可代擬 2–3 個版本用 AskUserQuestion 讓使用者挑或改。
-- 定稿後：`python3 TRACKER start "<那句話>"`。
-- 完成準則：使用者認可那句話，session 已建立、狀態行已轉出。
+先弄懂問題，才准開跑運算子：
+
+1. 分析使用者的問題陳述哪裡站不住：模糊詞、缺脈絡（誰？何時開始？多嚴重？試過什麼？為什麼現在要解？）、目標不明、或其實混了好幾個問題。
+2. 針對站不住的地方提問（一輪最多 3 個問題；選項明確用 AskUserQuestion，開放的就直接問）。問到你能自己把問題完整說出來為止——可以多輪。
+3. 用自己的話把問題**重述**成「**目標 − 現狀**」的一句話，用 AskUserQuestion 請使用者確認（確認／要修改）。
+4. 使用者確認後：`python3 TRACKER start "<那句話>"`。
+
+- 完成準則：使用者明確確認你重述的問題，session 已建立、狀態行已轉出。
 
 ### 2. 分診
 
@@ -50,12 +55,17 @@ disable-model-invocation: true
 
 ### 4. 回合（核心循環）
 
+選完家族就直接開跑——回合數與每回合招數依鐵律 1 固定，向使用者確認數量不是流程的一部分。
+
+**第一個回合開始前**，先提示使用者一次（之後不重複）：
+「每題都可以在 Other 自由輸入你的想法；如果選項都不好，在 Other 打『跳過』，這招就會被跳過。」
+
 對選定家族依序處理。一個回合：
 
 1. 取該家族 2 個未用運算子：`python3 TRACKER ask <id1> <id2>`（狀態行轉出）。
 2. 對照 operators.md 的定義與例子，替**使用者的問題**各生 3 個具體候選。
 3. AskUserQuestion 一次兩題（每題＝一個運算子，`multiSelect: true`，選項＝3 個候選）。
-4. 落帳：被選中或使用者 Other 輸入的 → 用 Edit 記進 worksheet「過程」段，`python3 TRACKER used <id>`；整題沒有收穫的 → `python3 TRACKER skip <id>`。
+4. 落帳：被選中或使用者 Other 輸入想法的 → 用 Edit 記進 worksheet「過程」段，`python3 TRACKER used <id>`；使用者在 Other 表示「跳過」「都不好」或該題沒有收穫的 → `python3 TRACKER skip <id>`。
 
 - 完成準則：選定家族的運算子出完，或使用者說「夠了／收斂」。
 
