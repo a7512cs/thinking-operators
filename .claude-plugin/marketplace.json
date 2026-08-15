@@ -1,0 +1,18 @@
+{
+  "name": "thinking-operators",
+  "owner": {
+    "name": "a7512cs"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins",
+    "description": "問答式解題引擎：55 個思考運算子、12 個家族、腳本追蹤使用狀態。"
+  },
+  "plugins": [
+    {
+      "name": "thinking-operators",
+      "source": "./plugins/thinking-operators",
+      "description": "手動觸發的問答式解題流程（/thinking-operators:solve）：分診 → 選家族 → 代打生候選 → 收斂，tracker 腳本＋hook 保證狀態不亂。",
+      "category": "thinking"
+    }
+  ]
+}
