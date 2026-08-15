@@ -3,11 +3,23 @@
 > 繁體中文說明：[README.zh-TW.md](./README.zh-TW.md)
 
 A question-and-answer problem-solving engine for Claude Code.
-It packs 55 "thinking operators" in 12 families (add, subtract, multiply, divide,
-reverse, substitute, morph, time, reframe, resources, diverge, verify).
-The flow: clarify the problem → triage → pick families → 2 operators per round,
-4 candidates each → converge. A tracker script records the state of every operator.
+When you are stuck on a problem, it walks you through a solving flow:
+clarify the problem, pick fitting thinking moves from 55 "thinking operators"
+(12 families: add, subtract, multiply, divide, reverse, substitute, morph, time,
+reframe, resources, diverge, verify), generate concrete ideas for you to choose from,
+then converge on a plan. A tracker script records the state of every operator.
 Each time you send a message, a hook prints one 🧩 status line — you and the AI never lose track.
+
+The 55 operators are merged from 8 classic checklists:
+
+- Osborn Checklist
+- SCAMPER
+- The Twelve Methods (和田十二法 / 創意十二訣)
+- TRIZ 40 inventive principles
+- SIT — Systematic Inventive Thinking ("Inside the Box")
+- Pólya's heuristics from "How to Solve It"
+- Dokushozaru's "Problem Solving Compendium" + "Idea Compendium" (読書猿)
+- General mental models (Munger, Farnam Street, etc.)
 
 ## Install
 
