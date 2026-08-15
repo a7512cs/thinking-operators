@@ -15,9 +15,9 @@ disable-model-invocation: true
 ## 鐵律（全程適用）
 
 1. 一回合最多呈現 **2 個運算子**。
-2. 每次跑 TRACKER 後，把它印出的 🧩 狀態行**原封不動**轉給使用者。
-3. 候選必須貼著使用者的問題寫成**具體做法**（一個運算子 **4 個候選**；AskUserQuestion 自帶 Other，使用者看到共 5 個選項），寫定義的複述不算候選。
-4. 所有選擇用 AskUserQuestion 呈現——工具內建「Other」，使用者永遠可以自由輸入。
+2. 候選必須貼著使用者的問題寫成**具體做法**（一個運算子 **4 個候選**；AskUserQuestion 自帶 Other，使用者看到共 5 個選項），寫定義的複述不算候選。
+3. 所有選擇用 AskUserQuestion 呈現——工具內建「Other」，使用者永遠可以自由輸入。
+4. 🧩 狀態行由 hook 在使用者送訊息時自動注入，你只要照實跑 TRACKER 指令把狀態記正確即可。
 
 ## 步驟
 
@@ -26,7 +26,7 @@ disable-model-invocation: true
 - 使用者帶 `--resume` 或說要繼續上次 → `python3 TRACKER resume`，跳到上次進度。
 - 否則進步驟 1。
 - 讀 operators.md 進 context。
-- 完成準則：🧩 狀態行已出現在對話裡（resume 時）。
+- 完成準則：（resume 時）進度已接上。
 
 ### 1. 問題釐清（拷問式）
 
@@ -37,7 +37,7 @@ disable-model-invocation: true
 3. 用自己的話把問題**重述**成「**目標 − 現狀**」的一句話，用 AskUserQuestion 請使用者確認（確認／要修改）。
 4. 使用者確認後：`python3 TRACKER start "<那句話>"`。
 
-- 完成準則：使用者明確確認你重述的問題，session 已建立、狀態行已轉出。
+- 完成準則：使用者明確確認你重述的問題，session 已建立。
 
 ### 2. 分診
 
@@ -59,15 +59,14 @@ disable-model-invocation: true
 **第一個回合開始前**，先提示使用者一次（之後不重複）：
 「每題都可以在 Other 自由輸入你的想法；如果選項都不好，在 Other 打『跳過』，這招就會被跳過。」
 
-對選定家族依序處理。一個回合固定五步：
+對選定家族依序處理。一個回合固定四步：
 
 1. 取該家族 2 個未用運算子：`python3 TRACKER ask <id1> <id2>`。
 2. 對照 operators.md 的定義與例子，替**使用者的問題**各生 4 個具體候選。
 3. AskUserQuestion 一次兩題（每題＝一個運算子，`multiSelect: true`，選項＝4 個候選；工具自帶 Other，使用者看到共 5 個）。
 4. 落帳：被選中或使用者 Other 輸入想法的 → 用 Edit 記進 worksheet「過程」段，`python3 TRACKER used <id>`；使用者在 Other 表示「跳過」「都不好」或該題沒有收穫的 → `python3 TRACKER skip <id>`。
-5. **回合收尾（每回合必做）**：把落帳後 TRACKER 印出的最新一行 🧩 狀態，貼在給使用者的訊息裡（放在下一回合提問之前）。狀態行沒貼出，這回合就不算結束。
 
-- 完成準則：選定家族的運算子出完，或使用者說「夠了／收斂」——且每個回合都以 🧩 狀態行收尾。
+- 完成準則：選定家族的運算子出完，或使用者說「夠了／收斂」。
 
 ### 5. 收斂
 
