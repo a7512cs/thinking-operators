@@ -1,4 +1,4 @@
-# thinking-operators
+# idea-pump
 
 問答式解題引擎（Claude Code plugin）。當你卡在一個問題上，它用問答帶你走一遍解題流程：
 先把問題釐清，再從 55 個「思考運算子」（12 家族：加減乘除反代變時問資散驗）裡挑合適的思路，
@@ -19,22 +19,22 @@
 ## 安裝
 
 ```bash
-claude plugin marketplace add a7512cs/thinking-operators
-claude plugin install thinking-operators@thinking-operators
+claude plugin marketplace add a7512cs/idea-pump
+claude plugin install idea-pump@idea-pump
 ```
 
 不用預先建立任何資料夾。
 
 開發者改完程式碼要讓已安裝的 plugin 更新：marketplace 快照是從 GitHub 拉的，
-所以流程是 **commit → push →** `claude plugin marketplace update thinking-operators` **→ uninstall/install 重裝**。
+所以流程是 **commit → push →** `claude plugin marketplace update idea-pump` **→ uninstall/install 重裝**。
 
 ## 用法
 
 在你想解題的資料夾開一個 Claude Code session，輸入：
 
 ```
-/thinking-operators:solve            # 打 /solve 會模糊比對到
-/thinking-operators:solve --resume   # 繼續這個資料夾上次未結束的 session
+/idea-pump:solve            # 打 /solve 會模糊比對到
+/idea-pump:solve --resume   # 繼續這個資料夾上次未結束的 session
 ```
 
 - 只能手動觸發（`disable-model-invocation: true`），不會在平常工作時自己跳出來。
@@ -53,7 +53,7 @@ claude plugin install thinking-operators@thinking-operators
 
 ```
 .claude-plugin/marketplace.json      marketplace 定義
-plugins/thinking-operators/
+plugins/idea-pump/
 ├── .claude-plugin/plugin.json
 ├── skills/solve/SKILL.md            問答流程
 ├── references/operators.json        55 招機讀版（tracker 與 SKILL 的單一事實來源）

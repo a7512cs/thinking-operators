@@ -1,5 +1,5 @@
 {
-  "name": "thinking-operators",
+  "name": "idea-pump",
   "owner": {
     "name": "a7512cs"
   },
@@ -9,9 +9,9 @@
   },
   "plugins": [
     {
-      "name": "thinking-operators",
-      "source": "./plugins/thinking-operators",
-      "description": "手動觸發的問答式解題流程（/thinking-operators:solve）：分診 → 選家族 → 代打生候選 → 收斂，tracker 腳本＋hook 保證狀態不亂。",
+      "name": "idea-pump",
+      "source": "./plugins/idea-pump",
+      "description": "手動觸發的問答式解題流程（/idea-pump:solve）：分診 → 選家族 → 代打生候選 → 收斂，tracker 腳本＋hook 保證狀態不亂。",
       "category": "thinking"
     }
   ]

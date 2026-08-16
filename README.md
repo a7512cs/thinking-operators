@@ -1,4 +1,4 @@
-# thinking-operators
+# idea-pump
 
 > 繁體中文說明：[README.zh-TW.md](./README.zh-TW.md)
 
@@ -24,22 +24,22 @@ The 55 operators are merged from 8 classic checklists:
 ## Install
 
 ```bash
-claude plugin marketplace add a7512cs/thinking-operators
-claude plugin install thinking-operators@thinking-operators
+claude plugin marketplace add a7512cs/idea-pump
+claude plugin install idea-pump@idea-pump
 ```
 
 No folder setup needed.
 
 To ship an update as a developer: commit → push →
-`claude plugin marketplace update thinking-operators` → uninstall/install.
+`claude plugin marketplace update idea-pump` → uninstall/install.
 
 ## Usage
 
 Open Claude Code in the folder where you want to solve a problem:
 
 ```
-/thinking-operators:solve            # typing /solve fuzzy-matches it
-/thinking-operators:solve --resume   # continue the unfinished session in this folder
+/idea-pump:solve            # typing /solve fuzzy-matches it
+/idea-pump:solve --resume   # continue the unfinished session in this folder
 ```
 
 Manual trigger only (`disable-model-invocation: true`) — it never fires on its own.
@@ -59,7 +59,7 @@ Note: worksheets contain your problem text — be careful in public repos.
 
 ```
 .claude-plugin/marketplace.json      marketplace definition
-plugins/thinking-operators/
+plugins/idea-pump/
 ├── .claude-plugin/plugin.json
 ├── skills/solve/SKILL.md            the Q&A flow
 ├── references/operators.json        55 operators, machine-readable (single source of truth)
